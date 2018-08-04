@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Online  exam</title>
+  </head>
+  <body>
+    <h2 class="page-header">Register</h2>
+    <p>Admin can add new user</p>
+    <form method="post" action="/users/register">
+       <div class="form-group">
+        <label>Name</label>
+        <input type="text" class="form-control" placeholder="Name" name="name">
+      </div>
+      <div class="form-group">
+        <label>Username</label>
+        <input type="text" class="form-control" placeholder="Username" name="username">
+      </div>
+       <div class="form-group">
+        <label>Email</label>
+        <input type="email" class="form-control" placeholder="Email" name="email">
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" class="form-control" placeholder="Password" name="password">
+      </div>
+      <div class="form-group">
+        <label>Confirm Password</label>
+        <input type="password" class="form-control" placeholder="Password" name="password2">
+      </div>
+       <div class="form-group">
+        <label>Enter 1 for admin, 0 for student</label>
+        <input type="number" class="form-control" placeholder="Admin or Non-admin" name="group">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+
+  </body>
+</html>
