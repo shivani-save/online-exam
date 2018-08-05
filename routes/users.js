@@ -13,6 +13,10 @@ router.get('/login', function (req, res) {
 	res.render('login.html');
 });
 
+router.get('/admin' , function (req, res) {
+	res.render('admin.html');
+});
+
 router.post('/admin' , function (req, res) {
 	var choice = req.body.action;
 	console.log(choice);
@@ -20,10 +24,6 @@ router.post('/admin' , function (req, res) {
 	  res.render('register.html');
 	  else
 	  res.render('addQuestion.html');
-});
-
-router.get('/admin' , function (req, res) {
-	res.render('admin.html');
 });
 
 router.get('/register', function (req, res) {
@@ -60,7 +60,6 @@ router.post('/addQuestion' , function (req, res) {
 
 router.get('/question', function (req, res){
 	res.send(JSON.stringify(Questions));
-	//console.log("Current question is "+ Questions[questionCount]);
 });
 
 router.post('/register', function (req, res) {
@@ -113,9 +112,9 @@ router.post('/register', function (req, res) {
 		});
 });
 
-router.post('/student',function(req, res){
-	res.render('exam.html');
-});
+// router.post('/student',function(req, res){
+// 	res.render('exam.html');
+// });
 
 router.get('/exam', function(req, res){
 	res.render('exam.html');
@@ -184,5 +183,3 @@ router.get('/logout', function (req, res) {
 });
 
 module.exports = router;
-//mongod -dbpath C:\Users\Shivani\Desktop\Projects\online-exam\data\db
-//https://appdividend.com/2018/05/08/vuex-axios-get-request-tutorial-with-example/

@@ -9,10 +9,10 @@
 	<body>
 		<div id="vue-app">
 			<h1>Question</h1>
-			<p>{{Question[1].text}}</p>
-					<p v-for="option in Question[1].options">
-						<input type="radio" name="optionSelected" value="">{{option}}
-					</p>
+			<p>{{Question[counter].text}}</p>
+				<p v-for="option in Question[counter].options">
+					<input type="radio" name="optionSelected" value="">{{option}}
+				</p>
 			<button v-on:click="counter -= 1">Prev</button>
 			<button v-on:click="counter += 1">Next</button>
 		</div>
@@ -20,7 +20,8 @@
 		var app = new Vue({
 			el:'#vue-app',
 			data: {
-				Question: []
+				Question: [],
+				counter: 0
 			},
 			created: function () {
 				this.loadQuestion();
