@@ -8,8 +8,8 @@
 	</head>
 	<body>
 		<div id="vue-app">
-			<h1>Question 1</h1>
-			<p>{{Question[0].text}}</p>
+			<h1>Question</h1>
+			<p>{{Question.text}}</p>
 					<p v-for="option in Question.options">
 						<input type="radio" name="optionSelected" value="">{{option}}
 					</p>
@@ -19,23 +19,25 @@
 		<script>
 		var app = new Vue({
 			el:'#vue-app',
-			data: function() {
-				return {
-					Question: []
-				};
+			data: {
+				Question: {}
 			},
-			mounted(){
-				axios.get('http://localhost:3000/question')
-				.then((response) => {
-					console.log(response.data);
-					this.Question = response.data;
-				})
-				.catch((error) => {
-					console.log(error);
-				})
+			created: function () {
+				this.loadQuestion();
+			},
+			methods: {
+				loadQuestion: function () {
+					var app = this;
+					axios.get('http://localhost:3000/users/question')
+					.then(function (response) {
+						app.Question = response.data;
+					})
+					.catch(function (error) {
+						console.log(error);
+					});
+				}
 			}
-			//counter : 0
-		})
+		});
 		</script>
 	</body>
 </html>

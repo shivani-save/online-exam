@@ -5,6 +5,7 @@ var LocalStrategy = require('passport-local').Strategy;
 var User = require('../models/user');
 var Question = require('../models/questions');
 var questionCount = 0;
+//var axios = require('axios');
 
 var newQuestion = {};
 // Login
@@ -33,10 +34,6 @@ router.get('/addQuestion', function (req, res) {
 	res.render('addQuestion.html');
 });
 
-router.get('/question', function (req, res){
-	res.send(newQuestion);
-});
-
 router.post('/addQuestion' , function (req, res) {
 	var text = req.body.questionText;
 	var a = req.body.a;
@@ -59,6 +56,11 @@ router.post('/addQuestion' , function (req, res) {
 	  			if (err) return handleError(err);
 	  			console.log(newQuestion);
 				});
+});
+
+router.get('/question', function (req, res){
+	//res.json(newQuestion);
+	res.send(newQuestion);
 });
 
 router.post('/register', function (req, res) {
@@ -112,6 +114,10 @@ router.post('/register', function (req, res) {
 });
 
 router.post('/student',function(req, res){
+	res.render('exam.html');
+});
+
+router.get('/exam', function(req, res){
 	res.render('exam.html');
 });
 
