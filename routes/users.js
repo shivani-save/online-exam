@@ -5,7 +5,7 @@ var LocalStrategy = require('passport-local').Strategy;
 var User = require('../models/user');
 var Question = require('../models/questions');
 var questionCount = 0;
-//var axios = require('axios');
+var Questions = [];
 
 var newQuestion = {};
 // Login
@@ -51,16 +51,16 @@ router.post('/addQuestion' , function (req, res) {
 		answer: answer
  		//topic: topic
 	});
-
+	Questions.push(newQuestion);
 	newQuestion.save(function (err) {
 	  			if (err) return handleError(err);
-	  			console.log(newQuestion);
+	  			console.log("Added \n"+newQuestion);
 				});
 });
 
 router.get('/question', function (req, res){
-	//res.json(newQuestion);
-	res.send(newQuestion);
+	res.send(JSON.stringify(Questions));
+	//console.log("Current question is "+ Questions[questionCount]);
 });
 
 router.post('/register', function (req, res) {

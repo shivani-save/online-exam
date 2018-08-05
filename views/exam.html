@@ -9,8 +9,8 @@
 	<body>
 		<div id="vue-app">
 			<h1>Question</h1>
-			<p>{{Question.text}}</p>
-					<p v-for="option in Question.options">
+			<p>{{Question[1].text}}</p>
+					<p v-for="option in Question[1].options">
 						<input type="radio" name="optionSelected" value="">{{option}}
 					</p>
 			<button v-on:click="counter -= 1">Prev</button>
@@ -20,7 +20,7 @@
 		var app = new Vue({
 			el:'#vue-app',
 			data: {
-				Question: {}
+				Question: []
 			},
 			created: function () {
 				this.loadQuestion();
@@ -30,7 +30,7 @@
 					var app = this;
 					axios.get('http://localhost:3000/users/question')
 					.then(function (response) {
-						app.Question = response.data;
+					app.Question = response.data;
 					})
 					.catch(function (error) {
 						console.log(error);
