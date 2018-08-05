@@ -6,6 +6,7 @@ var User = require('../models/user');
 var Question = require('../models/questions');
 var questionCount = 0;
 
+var newQuestion = {};
 // Login
 router.get('/login', function (req, res) {
 	res.render('login.html');
@@ -32,6 +33,10 @@ router.get('/addQuestion', function (req, res) {
 	res.render('addQuestion.html');
 });
 
+router.get('/question', function (req, res){
+	res.send(newQuestion);
+});
+
 router.post('/addQuestion' , function (req, res) {
 	var text = req.body.questionText;
 	var a = req.body.a;
@@ -42,7 +47,7 @@ router.post('/addQuestion' , function (req, res) {
 	var number = questionCount++;
 //	var topic = req.body.topic;
 	var options = [a,b,c,d];
-	var newQuestion = new Question({
+	newQuestion = new Question({
 		text: text,
 		options: options,
 		number: number,
@@ -140,13 +145,11 @@ passport.deserializeUser(function (id, done) {
 	});
 });
 
-// router.get('/student', function(req, res){
-// 	res.render('student');
-// });
 
 router.post('/student', function(req, res){
 	res.redirect('/users/exam');
 });
+
 
 router.get('/exam', function(req, res){
 	res.render('exam.html');
@@ -176,3 +179,4 @@ router.get('/logout', function (req, res) {
 
 module.exports = router;
 //mongod -dbpath C:\Users\Shivani\Desktop\Projects\online-exam\data\db
+//https://appdividend.com/2018/05/08/vuex-axios-get-request-tutorial-with-example/

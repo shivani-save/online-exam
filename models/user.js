@@ -2,7 +2,7 @@
 var mongoose = require('mongoose');
 var bcrypt = require('bcryptjs');
 
-mongoose.connect('mongodb://localhost/node-api');
+mongoose.connect('mongodb://localhost/online-exam');
 
 // User Schema where 1 is for admin and 0 is for student
 var UserSchema = mongoose.Schema({
