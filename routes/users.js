@@ -8,7 +8,7 @@ var questionCount = 0;
 var Questions = [];
 
 var newQuestion = {};
-// Login
+
 router.get('/login', function (req, res) {
 	res.render('login.html');
 });
@@ -42,14 +42,12 @@ router.post('/addQuestion' , function (req, res) {
 	var d = req.body.d;
 	var answer = req.body.answer;
 	var number = questionCount++;
-//	var topic = req.body.topic;
 	var options = [a,b,c,d];
 	newQuestion = new Question({
 		text: text,
 		options: options,
 		number: number,
 		answer: answer
- 		//topic: topic
 	});
 	Questions.push(newQuestion);
 	newQuestion.save(function (err) {
@@ -112,9 +110,6 @@ router.post('/register', function (req, res) {
 		});
 });
 
-// router.post('/student',function(req, res){
-// 	res.render('exam.html');
-// });
 
 router.get('/exam', function(req, res){
 	res.render('exam.html');
@@ -183,3 +178,5 @@ router.get('/logout', function (req, res) {
 });
 
 module.exports = router;
+//cd C:\Program Files\MongoDB\Server\4.0\bin
+//mongod -dbpath D:\data\db

@@ -5,23 +5,49 @@
 		<title>Online Exam Application</title>
 		<script src="https://cdn.jsdelivr.net/npm/vue"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+		<style media="screen">
+				body{
+					background-color: white;
+					margin: 0;
+					font-family: Karla,sans-serif;
+					display: block;
+				}
+				#progress-bar{
+					width: 500px;
+					border: 1px solid #000;
+					margin: 50px auto 20px auto;
+					border-radius: 15px;
+				}
+				#progress-bar div{
+					height: 30px;
+					background: #00e676;
+					color: rgba(100,20,200,0.9);
+					font-size: 30px;
+					border-radius: 15px;
+			}
+		</style>
 	</head>
 	<body>
 		<div id="vue-app">
-			<h1>Question</h1>
+			<h1>Question {{counter + 1}}</h1>
 			<p>{{Question[counter].text}}</p>
 				<p v-for="option in Question[counter].options">
 					<input type="radio" name="optionSelected" value="">{{option}}
 				</p>
-			<button v-on:click="counter -= 1">Prev</button>
-			<button v-on:click="counter += 1">Next</button>
+			<button v-on:click="prev">Prev</button>
+			<button v-on:click="next">Next</button>
+			<div id = "progress-bar">
+				<div v-bind:style="{width: level+'%'}">&nbsp;&nbsp;&nbsp;&nbsp;{{level}}%</div>
+			</div>
 		</div>
 		<script>
 		var app = new Vue({
 			el:'#vue-app',
 			data: {
 				Question: [],
-				counter: 0
+				counter: 0,
+				level: 0,
+				no_of_Ques: 3
 			},
 			created: function () {
 				this.loadQuestion();
@@ -32,11 +58,27 @@
 					axios.get('http://localhost:3000/users/question')
 					.then(function (response) {
 					app.Question = response.data;
+					app.no_of_Ques =  response.data.length;
+
 					})
 					.catch(function (error) {
 						console.log(error);
 					});
-				}
+					console.log("No of questions read "+this.no_of_Ques);
+				},
+				next: function() {
+			      if(this.level < 100){
+			        this.level += 100 / (this.no_of_Ques-1);
+			        this.counter += 1;
+      }
+    },
+		    prev: function(){
+		      if(this.level > 0){
+		        this.level -= 100 / (this.no_of_Ques-1);
+		        this.counter -=  1;
+		      }
+		    }
+
 			}
 		});
 		</script>
