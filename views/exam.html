@@ -25,10 +25,29 @@
 					font-size: 30px;
 					border-radius: 15px;
 			}
+				#side-bar{
+					height: 100%;
+					width: 100px;
+					position: fixed;
+					margin-left: 1000px;
+					text-align: center;
+				}
+				#side-bar ul li{
+					list-style: none;
+					color: white;
+					margin: 0;
+					padding-top: 50px;
+					background-color: black;
+				}
 		</style>
 	</head>
 	<body>
 		<div id="vue-app">
+			<div id="side-bar">
+				<ul>
+					<li v-for = "i in no_of_Ques" v-bind:id = "counter" v-bind:ref = "counter">{{i}}</li>
+				</ul>
+			</div>
 			<h1>Question {{counter + 1}}</h1>
 			<p>{{Question[counter].text}}</p>
 				<p v-for="option in Question[counter].options">
@@ -36,6 +55,7 @@
 				</p>
 			<button v-on:click="prev">Prev</button>
 			<button v-on:click="next">Next</button>
+			<button v-on:click="colorOnSubmit">Submit</button>
 			<div id = "progress-bar">
 				<div v-bind:style="{width: level+'%'}">&nbsp;&nbsp;&nbsp;&nbsp;{{level}}%</div>
 			</div>
@@ -77,9 +97,14 @@
 		        this.level -= 100 / (this.no_of_Ques-1);
 		        this.counter -=  1;
 		      }
-		    }
-
-			}
+		    },
+				colorOnSubmit: function() {
+					var questionNumber = this.counter;
+					console.log("Question "+(questionNumber+1)+" has been submitted");
+					var listItem = this.$refs[questionNumber];
+					listItem[questionNumber].style.backgroundColor = "green";
+					}
+				}
 		});
 		</script>
 	</body>
